@@ -53,6 +53,8 @@
       border-radius:10px;background:var(--panel);
       color:var(--text);font-size:14px;font-weight:500;
       transition:border-color .15s, background .15s;
+      cursor:pointer;
+      font-family:inherit;
     }
     .btn:hover{border-color:var(--accent);background:#152441;text-decoration:none}
     .btn svg{width:16px;height:16px}
@@ -61,15 +63,41 @@
       color:var(--muted);margin:48px 0 18px;font-weight:600;
     }
     section p{margin:0 0 14px}
-    .now{
-      border-left:3px solid var(--accent);
-      padding:12px 18px;
-      background:#0e1830;
-      border-radius:4px;
-      color:var(--chip-text);
-      font-size:15px;
+
+    /* Experience block */
+    .role{
+      display:flex;gap:18px;align-items:flex-start;
+      padding:18px 0;border-bottom:1px solid var(--border);
     }
-    .now strong{color:var(--text)}
+    .role:last-child{border-bottom:none}
+    .role-logos{
+      flex:0 0 110px;
+      display:flex;flex-direction:column;gap:6px;
+    }
+    .logo{
+      display:flex;align-items:center;justify-content:center;
+      height:44px;border-radius:8px;
+      font-weight:700;font-size:13px;letter-spacing:.04em;
+      text-align:center;padding:0 8px;
+      box-shadow:inset 0 -2px 0 rgba(0,0,0,0.15);
+    }
+    .logo-ucsf{background:#052049;color:#FFC72C}
+    .logo-heng{background:#8B0000;color:#FFFFFF}
+    .logo-abl{background:#1F2937;color:#9CD3DC}
+    .logo-umd{background:#E03A3E;color:#FFD200}
+    .logo-aug{background:#0E4D92;color:#FFFFFF}
+    .logo-piramal{background:#A02828;color:#FFFFFF}
+    .logo-sun{background:#F39C12;color:#7B341E}
+    .role-body{flex:1;min-width:0}
+    .role-title{
+      font-weight:600;color:var(--text);margin-bottom:2px;font-size:15px;
+    }
+    .role-meta{
+      color:var(--muted);font-size:13px;margin-bottom:8px;
+    }
+    .role-body p{margin:0;font-size:14.5px;line-height:1.55}
+
+    /* Featured projects */
     .project{
       border:1px solid var(--border);
       border-radius:14px;
@@ -77,9 +105,7 @@
       background:var(--panel);
       margin-bottom:18px;
     }
-    .project h3{
-      margin:0 0 6px;font-size:20px;letter-spacing:-.2px;
-    }
+    .project h3{margin:0 0 6px;font-size:20px;letter-spacing:-.2px}
     .project .meta{color:var(--muted);font-size:14px;margin-bottom:14px}
     .project p{margin:0 0 12px}
     .project img{
@@ -88,12 +114,17 @@
       margin:14px 0 6px;display:block;
     }
     .project .links{margin-top:14px}
+    .caption{color:var(--muted);font-size:13px;margin-top:8px}
+
+    /* Skill chips */
     .chips{display:flex;flex-wrap:wrap;gap:8px}
     .chip{
       background:var(--chip);color:var(--chip-text);
       padding:6px 12px;border-radius:999px;font-size:13px;
       border:1px solid var(--border);
     }
+    .copy-note{color:var(--muted);font-size:12px;margin-left:8px}
+
     footer{
       margin-top:72px;color:var(--muted);font-size:13px;
       text-align:center;
@@ -102,6 +133,8 @@
     @media (max-width:560px){
       .wrap{padding:40px 20px 64px}
       h1{font-size:34px}
+      .role{flex-direction:column;gap:10px}
+      .role-logos{flex-direction:row;flex:0 0 auto}
     }
   </style>
 </head>
@@ -114,7 +147,7 @@
         Translational Oncology Scientist · Preclinical Drug Discovery · Biomarker Strategy
       </div>
       <div class="links">
-        <a class="btn" href="mailto:rupa.guha.umb@gmail.com">
+        <a class="btn" href="#contact">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Contact
@@ -148,11 +181,15 @@
         package development for first-in-human filings.
       </p>
       <p>
-        Industry experience spans translational biomarker strategy for
-        <strong>bispecific antibody programs at Hengenix (Henlius US)</strong>,
-        CRO partnership management, and regulatory-aligned documentation
-        across multiple IND submissions. Doctoral research generated the
-        preclinical efficacy and mechanistic data package that supported
+        Industry track record spans
+        <strong>biomarker strategy and in vivo pharmacology for bispecific
+        antibody programs at Hengenix (Henlius US)</strong>,
+        immunogenicity and immune-monitoring assays as a Staff Scientist
+        at the CRO ABL Inc., and IND-enabling pharmacology and toxicology
+        across multiple drug-discovery programs at Piramal Life Sciences
+        and Sun Pharma. Doctoral research at the University of Maryland in
+        collaboration with A&amp;G Pharmaceutical generated the preclinical
+        efficacy and mechanistic data package that supported
         <strong>FDA IND clearance for AG01</strong>, a first-in-class
         anti-progranulin antibody currently in Phase I for advanced solid
         tumors (<a href="https://clinicaltrials.gov/study/NCT05627960"
@@ -162,42 +199,137 @@
       </p>
     </section>
 
-    <section>
-      <h2>Now</h2>
-      <p class="now">
-        <strong>Postdoctoral Research Scientist, UCSF — Department of
-        Radiation Oncology</strong> (2023&nbsp;–&nbsp;present).
-        Investigating mechanisms of therapeutic resistance in
-        triple-negative breast cancer using engineered cell-line panels,
-        with a focus on <strong>MAP3K8-driven stress-adaptive signalling
-        within the RAS-RAF-MEK-ERK axis</strong> in combination with
-        radiation and chemotherapy. Characterising small-molecule and
-        PROTAC degraders against MAP3K8, mapping its IL-1β-mediated
-        transcriptional control, and integrating R-based bioinformatics
-        with functional <em>in vitro</em> validation to identify
-        clinically actionable resistance nodes and combination strategies.
-      </p>
+    <section id="experience">
+      <h2>Experience</h2>
+
+      <div class="role">
+        <div class="role-logos"><span class="logo logo-ucsf">UCSF</span></div>
+        <div class="role-body">
+          <div class="role-title">Postdoctoral Research Scientist · UCSF — Department of Radiation Oncology</div>
+          <div class="role-meta">San Francisco, CA · 2023 – present</div>
+          <p>
+            Investigating mechanisms of therapeutic resistance in
+            triple-negative breast cancer using <strong>14 engineered
+            cell-line models</strong>, focused on MAP3K8-driven
+            stress-adaptive signalling within the RAS-RAF-MEK-ERK axis.
+            Characterising small-molecule and PROTAC degraders of MAP3K8,
+            dissecting its IL-1β-mediated transcriptional control, and
+            integrating R-based bioinformatics with functional
+            <em>in vitro</em> validation. Also screening drug combinations
+            in BRAF<sup>V600E</sup> and KRAS<sup>G12C</sup> colorectal
+            models to identify clinically actionable resistance nodes.
+          </p>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-logos"><span class="logo logo-heng">Hengenix</span></div>
+        <div class="role-body">
+          <div class="role-title">Senior Scientist I · Hengenix (Henlius US)</div>
+          <div class="role-meta">Milpitas, CA · 2022</div>
+          <p>
+            Directed <strong>translational biomarker strategy for two
+            bispecific antibody candidates</strong> entering a Phase I
+            immuno-oncology program, embedding pharmacodynamic endpoints
+            into the clinical protocol. Designed and executed humanised
+            tumour-model efficacy studies generating dose-response and
+            PK/PD data that informed lead-candidate prioritisation and
+            go/no-go decisions, and authored regulatory-aligned
+            preclinical study summaries for IND.
+          </p>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-logos"><span class="logo logo-abl">ABL Inc.</span></div>
+        <div class="role-body">
+          <div class="role-title">Staff Scientist · ABL, Inc. (CRO)</div>
+          <div class="role-meta">Rockville, MD · 2020 – 2021</div>
+          <p>
+            Led development, optimisation and qualification of
+            <strong>immunogenicity and functional immune assays</strong>
+            (immune-cell co-culture, cytokine release, ELISpot/FluoroSpot,
+            multi-parameter flow cytometry) supporting IND submissions
+            across oncology and viral-vaccine programs. Served as the
+            scientific liaison to <strong>4+ sponsor companies</strong>,
+            aligning bioanalytical assay design and validation strategy
+            with FDA and GLP expectations. Achieved a 98% on-time study
+            completion rate; contributed to a successful NIH grant
+            proposal for a vaccine development study.
+          </p>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-logos">
+          <span class="logo logo-umd">UMB</span>
+          <span class="logo logo-aug">A&amp;G Pharma</span>
+        </div>
+        <div class="role-body">
+          <div class="role-title">Ph.D., Toxicology (Cancer Biology) · University of Maryland, Baltimore — in collaboration with A&amp;G Pharmaceutical</div>
+          <div class="role-meta">Baltimore, MD · 2013 – 2020</div>
+          <p>
+            Validated <strong>GP88 / progranulin as a therapeutic target
+            in TNBC</strong> and characterised the multi-pathway mechanism
+            of action for the anti-progranulin antibody
+            <strong>AG01</strong> using <em>in vivo</em> models
+            (xenograft, metastasis), oncology protein arrays and molecular
+            profiling. <strong>Doctoral data package directly supported
+            FDA IND clearance for AG01</strong>, now in Phase I for
+            advanced solid tumors (NCT05627960). Also showed AG01
+            resensitised endocrine-resistant ER+ breast cancer cells to
+            aromatase inhibitor therapy, broadening the therapeutic
+            potential beyond TNBC. First-author publication in
+            <em>Breast Cancer Research and Treatment</em> (2021); presented
+            at AACR, SABCS and UMGCCC.
+          </p>
+        </div>
+      </div>
+
+      <div class="role">
+        <div class="role-logos">
+          <span class="logo logo-piramal">Piramal</span>
+          <span class="logo logo-sun">Sun Pharma</span>
+        </div>
+        <div class="role-body">
+          <div class="role-title">Industry Scientist · Piramal Life Sciences Ltd · Sun Pharma Advanced Research Center</div>
+          <div class="role-meta">India · 2005 – 2011</div>
+          <p>
+            Conducted <strong>IND-enabling <em>in vivo</em> pharmacology,
+            GLP toxicology and genotoxicity studies</strong> across rodent
+            and non-rodent models for multiple small-molecule
+            drug-discovery programs, contributing data to <strong>two U.S.
+            IND submissions</strong>. Co-inventor on
+            <a href="https://patents.google.com/patent/US9498507B2"
+            target="_blank" rel="noopener">U.S. Patent 9,498,507 B2</a>
+            for Viracure (PP-9706642), an antiviral therapeutic that
+            completed a Phase II clinical trial (CTRI/2011/05/001706).
+            Presented at ICAAC 2010 and 2012.
+          </p>
+        </div>
+      </div>
     </section>
 
     <section>
-      <h2>Featured project</h2>
+      <h2>Featured projects</h2>
+
       <div class="project">
-        <h3>TNBC chemoresistance biomarkers — MAP3K8 &amp; IL-1β</h3>
+        <h3>TNBC chemoresistance — MAP3K8 × IL-1β joint analysis</h3>
         <div class="meta">R · GEOquery · survival · officer · Claude Code</div>
         <p>
           A self-contained, reproducible R pipeline that grew out of my
-          postdoctoral work at UCSF on MAP3K8-driven chemoresistance in
-          triple-negative breast cancer. It evaluates MAP3K8 and IL-1β as
-          distant-relapse / chemoresistance biomarkers in chemo-treated
-          TNBC (GSE25066, n=178; with independent validation in GSE41998,
-          n=140). Each analysis ships with auto-generated
+          UCSF postdoctoral work on MAP3K8-driven chemoresistance. It
+          evaluates the joint behaviour of MAP3K8 and IL-1β as
+          distant-relapse biomarkers in chemo-treated triple-negative
+          breast cancer (GSE25066, n=178; with independent validation in
+          GSE41998, n=140). Each analysis ships with auto-generated
           <em>Methods.docx</em> outputs containing embedded figures,
-          statistics, interpretation, and limitations — so the analysis
+          statistics, interpretation and limitations — so the analysis
           and publishable methods stay in sync run after run.
         </p>
-        <img src="assets/featured_km.png"
+        <img src="assets/featured_4group.png"
              alt="Four-group Kaplan-Meier curves of MAP3K8 × IL-1β in TNBC, with risk table" />
-        <p style="color:var(--muted);font-size:13px;margin-top:8px">
+        <p class="caption">
           Four-group MAP3K8 × IL-1β median-split DRFS Kaplan-Meier in
           GSE25066 TNBC (n=178). Doubly-high tumours carry the highest
           distant-relapse risk; effects are additive
@@ -208,6 +340,49 @@
              target="_blank" rel="noopener">View on GitHub</a>
           <a class="btn" href="https://github.com/rupaguhaumb-dev/tnbc-chemoresistance-biomarkers/blob/main/Summary.docx"
              target="_blank" rel="noopener">Summary.docx</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3>MAP3K8 distant-relapse Kaplan-Meier in chemo-treated TNBC</h3>
+        <div class="meta">R · survival · survminer · GSE25066</div>
+        <p>
+          Single-gene survival readout for MAP3K8 in the GSE25066
+          neoadjuvant anthracycline-taxane TNBC cohort (n=178). Median
+          split of probe 205027_s_at; reported as HR for high vs low
+          (low = reference). Used as the prognostic baseline against
+          which the joint MAP3K8 × IL-1β model is built.
+        </p>
+        <img src="assets/featured_map3k8.png"
+             alt="MAP3K8 median-split Kaplan-Meier curves in chemo-treated TNBC" />
+        <p class="caption">
+          MAP3K8-high vs MAP3K8-low DRFS in GSE25066 TNBC.
+        </p>
+        <div class="links">
+          <a class="btn" href="https://github.com/rupaguhaumb-dev/tnbc-chemoresistance-biomarkers/tree/main/05_Single_Gene_KM"
+             target="_blank" rel="noopener">View on GitHub</a>
+        </div>
+      </div>
+
+      <div class="project">
+        <h3>IL-1β distant-relapse Kaplan-Meier in chemo-treated TNBC</h3>
+        <div class="meta">R · survival · survminer · GSE25066</div>
+        <p>
+          Companion single-gene readout for IL-1β in the same cohort.
+          Median split on the higher-mean GPL96 probe; reports HR for
+          high vs low. Visualises the late-relapse signal — curves
+          intertwine in the first ~20 months and only separate
+          afterwards, consistent with IL-1β's time-varying hazard
+          (Schoenfeld P = 0.022 in the multivariable Cox model).
+        </p>
+        <img src="assets/featured_il1b.png"
+             alt="IL-1β median-split Kaplan-Meier curves in chemo-treated TNBC" />
+        <p class="caption">
+          IL-1β-high vs IL-1β-low DRFS in GSE25066 TNBC.
+        </p>
+        <div class="links">
+          <a class="btn" href="https://github.com/rupaguhaumb-dev/tnbc-chemoresistance-biomarkers/tree/main/05_Single_Gene_KM"
+             target="_blank" rel="noopener">View on GitHub</a>
         </div>
       </div>
     </section>
@@ -226,8 +401,9 @@
         <span class="chip">PROTACs / Protein degraders</span>
         <span class="chip">Xenograft (CDX) models</span>
         <span class="chip">Humanised mouse models</span>
+        <span class="chip">GLP toxicology</span>
         <span class="chip">Flow cytometry</span>
-        <span class="chip">ELISA / ELISpot</span>
+        <span class="chip">ELISA / ELISpot / FluoroSpot</span>
         <span class="chip">CRO partnership management</span>
         <span class="chip">R / Bioconductor</span>
         <span class="chip">TCGA / GEO data mining</span>
@@ -235,17 +411,21 @@
       </div>
     </section>
 
-    <section>
+    <section id="contact">
       <h2>Get in touch</h2>
       <p>
         Open to translational oncology, preclinical drug discovery and
         biomarker scientist roles (full-time or contract), based in the
         San Francisco Bay Area — no sponsorship required.
       </p>
+      <p>
+        <strong>Email:</strong>
+        <a href="mailto:rupa.guha.umb@gmail.com">rupa.guha.umb@gmail.com</a>
+        <button class="btn" id="copy-email" type="button"
+                style="margin-left:8px;padding:4px 10px;font-size:12px"
+                onclick="navigator.clipboard.writeText('rupa.guha.umb@gmail.com').then(()=>{this.textContent='Copied!';setTimeout(()=>{this.textContent='Copy'},2000)})">Copy</button>
+      </p>
       <div class="links">
-        <a class="btn" href="mailto:rupa.guha.umb@gmail.com">
-          rupa.guha.umb@gmail.com
-        </a>
         <a class="btn" href="https://www.linkedin.com/in/rupa-guha-phd-cancerresearcher/"
            target="_blank" rel="noopener">linkedin.com/in/rupa-guha-phd-cancerresearcher</a>
         <a class="btn" href="https://github.com/rupaguhaumb-dev"
